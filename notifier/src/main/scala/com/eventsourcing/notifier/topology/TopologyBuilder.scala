@@ -13,11 +13,11 @@ import org.apache.kafka.streams.scala.serialization.Serdes.stringSerde
 import org.apache.kafka.streams.state.Stores
 
 object TopologyBuilder extends LazyLogging {
-  val BalanceChangeStore = "BalanceChangeStore"
+  val BalanceChangeStore = "FinalBalanceEvents"
 
   def buildTopology(configuration: NotifierConfiguration): Topology = {
     val balanceStateStoreBuilder = Stores.keyValueStoreBuilder(
-      Stores.inMemoryKeyValueStore(BalanceChangeStore),
+      Stores.persistentKeyValueStore(BalanceChangeStore),
       Serdes.String(),
       Serdes.Double()
     )

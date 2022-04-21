@@ -30,7 +30,7 @@ object TopologyBuilder extends LazyLogging {
   def buildTopology(configuration: AtmConfiguration): Topology = {
     val builder = new Topology()
     val balanceStateStoreBuilder = Stores.keyValueStoreBuilder(
-      Stores.inMemoryKeyValueStore(BalanceStore),
+      Stores.persistentKeyValueStore(BalanceStore),
       Serdes.String(),
       Serdes.Double()
     )
